@@ -1,8 +1,11 @@
 import java.util.Date;
 
+import java.io.PrintStream;
+import java.util.Date;
+
 public class Account {
 
-    private final Statement statement;
+    private Statement statement;
 
     private Amount balance = Amount.amountOf(0);
 
@@ -10,12 +13,16 @@ public class Account {
         this.statement = statement;
     }
 
-    public void deposit(Amount value, Date date ) {
-        recordTransaction(value.negative(value),date);
+    public void deposit(Amount value, Date date) {
+        recordTransaction(value, date);
     }
 
-    public void withdraw(int amount){
+    public void withdrawal(Amount value, Date date) {
+        recordTransaction(value.negative(), date);
+    }
 
+    public void printStatement(PrintStream printer) {
+        statement.printTo(printer);
     }
 
     private void recordTransaction(Amount value, Date date) {
@@ -25,10 +32,5 @@ public class Account {
         statement.addLineContaining(transaction, balanceAfterTransaction);
     }
 
-    public void printStatements() {
-
-    }
-
-
-
 }
+
