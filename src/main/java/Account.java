@@ -1,5 +1,12 @@
 public class Account {
 
+    private final Statement statement;
+
+    public Account(Statement statement) {
+
+        this.statement = statement;
+    }
+
     void deposit(int amount) {
 
     }
@@ -11,5 +18,7 @@ public class Account {
     void printStatements() {
 
     }
+
+
 
 }
