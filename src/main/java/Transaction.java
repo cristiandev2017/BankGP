@@ -7,24 +7,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
-
+    //Se define una constante para el formato de las fechas
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String EMPTY_VALUE = "          ";
+
 
     private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
     private Amount value;
     private Date date;
-
+    //Se define los valores que vendran en la transaccion que son el valor y la fecha
     public Transaction(Amount value, Date date) {
         this.value = value;
         this.date = date;
     }
 
+    //Esta se crea para determinar el balance despues de la transaccion
     public Amount balanceAfterTransaction(Amount currentBalance) {
         return currentBalance.plus(value);
     }
-
+    //Para imprimir el contenido
     public void printTo(PrintStream printer, Amount currentBalance) {
         StringBuilder builder = new StringBuilder();
         addDateTo(builder);
@@ -32,7 +34,6 @@ public class Transaction {
         addCurrentBalanceTo(builder, currentBalance);
         printer.println(builder.toString());
     }
-
     private void addCurrentBalanceTo(StringBuilder builder, Amount currentBalance) {
         builder.append("| ")
                 .append(currentBalance.moneyRepresentation());
@@ -67,25 +68,5 @@ public class Transaction {
         builder.append(sdf.format(date));
         builder.append(" |");
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        Transaction other = (Transaction) obj;
-        if (date == null) {
-            if (other.date != null)
-                return false;
-        } else if (!date.equals(other.date))
-            return false;
-        if (value == null) {
-            if (other.value != null)
-                return false;
-        } else if (!value.equals(other.value))
-            return false;
-        return true;
-    }
-
-
 
 }
